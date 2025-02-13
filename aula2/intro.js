@@ -29,5 +29,33 @@ const pessoa={
 }
 // identifiers
 const {sobrenome : s, idade: i, endereco:{logradouro:logra}}=pessoa
-console.log(s,i, logradouro)
+console.log(s,i, logra)
 
+//concat
+const alunos = ["Miguel", "Pablo", "Abner", "Caio"]
+const alunas = ["Beatriz", "Pamela"]
+
+//Incluindo na array | Push
+alunos.push("Pedro")
+
+
+// deletando o ultimo item da array | Pop
+alunos.pop()
+
+// deletando o primeiro item da array | Shift 
+alunos.shift()
+
+// Deletando e adicionando | Splice
+alunos.splice(1,2,"João", "Francisco","Erick")
+
+const todos = alunos.concat(alunas)
+
+// Ordernas as informações | Sort
+todos.sort()
+
+console.log(todos)
+
+//Percorrendo a Array
+todos.forEach((nome,indice)=>{
+    console.log(nome,indice)
+})
