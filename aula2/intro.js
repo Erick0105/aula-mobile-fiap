@@ -1,0 +1,1 @@
+// condicao ? valor se verdadeiro : valor se falso
