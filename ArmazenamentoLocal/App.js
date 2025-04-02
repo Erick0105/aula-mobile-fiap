@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput,TouchableOpacity, FlatList } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,6 +8,7 @@ export default function App() {
 
   const[nomeProduto,setNomeproduto]=useState("")
   const[precoProduto,setPrecoProduto]=useState(0)
+  const[dadosProdutos,setDadosProdutos]=useState([])
 
   async function Salvar(){
     let produtos = []
@@ -27,7 +28,7 @@ export default function App() {
   }
 
   async function BuscarDados(){
-    let p =  JSON.parse(await AsyncStorage.getItem("PRODUTOS"))
+    setDadosProdutos(JSON.parse(await AsyncStorage.getItem("PRODUTOS")))
   }
   
   return (
@@ -51,7 +52,18 @@ export default function App() {
       <TouchableOpacity style={styles.btn} onPress={Salvar}>
         <Text>Cadastrar</Text>
       </TouchableOpacity>
-      
+
+      <FlatList
+        data={dadosProdutos}
+        renderItem={({produto,index})=>{
+          return(
+            <View style={styles.listarFlat}>
+              <Text>Nome: {produto.nome} - Preco: {produto.preco}</Text>
+            </View>
+          )
+        }}
+      />
+
       <StatusBar style="auto" />
     </View>
   );
@@ -80,5 +92,13 @@ const styles = StyleSheet.create({
     alignItems:"center",
     borderRadius:15,
     marginTop:10
+  },
+  listarFlat:{
+    width:300,
+    borderWidth:1,
+    height:80,
+    textAlign:"center",
+    justifyContent:"center",
+    marginVertical:3
   }
 });
